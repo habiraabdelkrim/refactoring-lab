@@ -1,12 +1,12 @@
 package org.example;
 
-class Customer {
-    private String name;
-    private boolean isMember;
+public class Customer {
+    private final String name;
+    private final boolean member;
 
-    public Customer(String name, boolean isMember) {
+    public Customer(String name, boolean member) {
         this.name = name;
-        this.isMember = isMember;
+        this.member = member;
     }
 
     public String getName() {
@@ -14,6 +14,11 @@ class Customer {
     }
 
     public boolean isMember() {
-        return isMember;
+        return member;
+    }
+
+    @Override
+    public String toString() {
+        return name + (member ? " (Member)" : "");
     }
 }

@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.List;
 
-class Order {
+public class Order {
     private Customer customer;
     private List<Item> items;
 

@@ -1,30 +1,36 @@
 package org.example;
 
-import org.example.Order;
-import org.example.Customer;
-import org.example.Item;
-
 public class OrderProcessor {
+
+    public String buildOrderSummary(Order order) {
+        StringBuilder sb = new StringBuilder();
+        double totalPrice = calculateTotalPrice(order);
+
+        sb.append("Order Summary:\n");
+        sb.append("Customer: ").append(order.getCustomer().getName()).append("\n");
+        sb.append("Items:\n");
+        for (Item item : order.getItems()) {
+            double itemTotal = item.getQuantity() * item.getPrice();
+            sb.append(String.format("  - %s: %d x $%.2f = $%.2f\n",
+                    item.getName(), item.getQuantity(), item.getPrice(), itemTotal));
+        }
+        sb.append(String.format("Total Price: $%.2f\n", totalPrice));
+
+        return sb.toString();
+    }
+
     public void printOrderSummary(Order order) {
-        // Calculate total price
+        System.out.print(buildOrderSummary(order));
+    }
+
+    private double calculateTotalPrice(Order order) {
         double totalPrice = 0;
         for (Item item : order.getItems()) {
             totalPrice += item.getPrice() * item.getQuantity();
         }
-
-        // Apply discount
         if (order.getCustomer().isMember()) {
-            totalPrice *= 0.9; // 10% discount for members
+            totalPrice *= 0.9;
         }
-
-        // Print summary
-        System.out.println("Order Summary:");
-        System.out.println("Customer: " + order.getCustomer().getName());
-        System.out.println("Items:");
-        for (Item item : order.getItems()) {
-            System.out.println("  - " + item.getName() + ": " + item.getQuantity() + " x $" + item.getPrice() + " = $"
-                    + (item.getQuantity() * item.getPrice()));
-        }
-        System.out.printf("Total Price: $%.2f%n", totalPrice);
+        return totalPrice;
     }
 }

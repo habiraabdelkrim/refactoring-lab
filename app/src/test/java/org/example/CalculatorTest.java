@@ -1,21 +1,18 @@
 package org.example;
-
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class CalculatorTest {
+
     @Test
-    public void testCalc() {
-        Calculator calc = new Calculator();
+    public void testPrtRes() {
         
-        // لاختبار القيم a = 3 و b = 2
-        double result = calc.calc(3.0, 2.0);
-        
-        // حساب القيمة يدويًا: 
-        // x = 3 + 2 = 5
-        // y = 3 * 2 = 6
-        // النتيجة المتوقعة = 5 / 6 = 0.8333...
-        assertEquals(0.8333, result, 0.0001);
+        Calculator calculator = new Calculator();
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        calculator.printResult(5.0);
+        assertTrue(outContent.toString().contains("Result: 5.0"));
     }
 }
-

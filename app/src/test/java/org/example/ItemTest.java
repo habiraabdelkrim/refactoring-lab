@@ -6,13 +6,20 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ItemTest {
 
     @Test
-    public void testItem() {
-        // إنشاء بيانات لاختبارها
-        Item item = new Item("Laptop", 1000.00, 3);
-
-        // اختبار القيم
+    public void testGetName() {
+        Item item = new Item("Laptop", 1200.0, 1);
         assertEquals("Laptop", item.getName());
-        assertEquals(1000.00, item.getPrice());
+    }
+
+    @Test
+    public void testGetPrice() {
+        Item item = new Item("Laptop", 1200.0, 1);
+        assertEquals(1200.0, item.getPrice());
+    }
+
+    @Test
+    public void testGetQuantity() {
+        Item item = new Item("Laptop", 1200.0, 3);
         assertEquals(3, item.getQuantity());
     }
 }
